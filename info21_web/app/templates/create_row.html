@@ -1,0 +1,75 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+Create row
+{% endblock %}
+
+{% block content_center %}
+<div class="center-content">
+
+    <div class="header-container">
+        <div class="icon-container">
+            <a href="{% url 'table_data' table_name=table_name %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                     class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                          d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+            </a>
+        </div>
+
+        <h1>Add record to: {{ table_name }}</h1>
+    </div>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+            {{ message }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <form id="createForm" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="button" class="btn custom-button"
+                data-toggle="modal"
+                data-target="#createModal">Create record
+        </button>
+    </form>
+</div>
+
+<div class="modal" id="createModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Are you sure you want to create new record?</h5>
+            </div>
+            <div class="modal-body">
+                <p>The changes will be irreversible.</p>
+            </div>
+            <div class="modal-footer d-flex justify-content-start">
+                <button type="button" class="btn custom-button"
+                        id="confirmEdit" onclick="submitForm()">Create record
+                </button>
+                <button type="button" class="btn sub-button"
+                        data-dismiss="modal">Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function submitForm() {
+        const form = document.getElementById('createForm');
+        if (form) {
+            form.submit();
+        }
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+FROM python:3.11
+
+COPY ./app_scripts code
+COPY ./requirements.txt code
+WORKDIR /code
+
+RUN ./installation.sh
+
+EXPOSE 8000
+
+ENTRYPOINT ["./run_app.sh"]

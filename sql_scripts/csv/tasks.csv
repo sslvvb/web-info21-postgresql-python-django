@@ -1,0 +1,6 @@
+title,maxxp,parenttask
+C2_SimpleBashUtils,250
+C3_s21_string+,500,C2_SimpleBashUtils
+C4_s21math,300,C3_s21_string+
+CPP1_s21_matrix+,300,C4_s21math
+CPP2_s21_containers,350,CPP1_s21_matrix+

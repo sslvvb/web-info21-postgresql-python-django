@@ -1,0 +1,117 @@
+{% extends "master.html" %}
+
+
+{% block title %}
+Operations
+{% endblock %}
+
+
+{% block subsection %}
+<nav>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <a href="/operations?tab=functions">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <b>Functions</b>
+                            </h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <a href="/operations?tab=raw">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <b>Raw input</b>
+                            </h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+
+{% block content_left %}
+<div class="functions" {% if tab != 'functions' %} style="display: none" {% endif %}>
+    <ol>
+        <li><a href="/operations?fnum=1">add p2p</a></li>
+        <li><a href="/operations?fnum=2">add verter</a></li>
+        <li><a href="/operations?fnum=3">human readable transferred points</a></li>
+        <li><a href="/operations?fnum=4">human readable xp earned</a></li>
+        <li><a href="/operations?fnum=5">peers not leaving during the day</a></li>
+        <li><a href="/operations?fnum=6">percentage of successful checks</a></li>
+        <li><a href="/operations?fnum=7">points change</a></li>
+        <li><a href="/operations?fnum=8">points change using hr-source</a></li>
+        <li><a href="/operations?fnum=9">most checked task daily</a></li>
+        <li><a href="/operations?fnum=10">last p2p duration</a></li>
+        <li><a href="/operations?fnum=11">who and when completed the block</a></li>
+        <li><a href="/operations?fnum=12">recommended for check</a></li>
+        <li><a href="/operations?fnum=13">two blocks stats</a></li>
+        <li><a href="/operations?fnum=14">most friendly peers</a></li>
+        <li><a href="/operations?fnum=15">peers passed check on birthday</a></li>
+        <li><a href="/operations?fnum=16">peers total xp</a></li>
+        <li><a href="/operations?fnum=17">peers did 1 and 2 tasks but not 3</a></li>
+        <li><a href="/operations?fnum=18">number of previous tasks</a></li>
+        <li><a href="/operations?fnum=19">lucky days</a></li>
+        <li><a href="/operations?fnum=20">peer completed max tasks</a></li>
+        <li><a href="/operations?fnum=21">peer with max xp</a></li>
+        <li><a href="/operations?fnum=22">peer max time in campus today</a></li>
+        <li><a href="/operations?fnum=23">peers came early N times</a></li>
+        <li><a href="/operations?fnum=24">peers left M times last N days</a></li>
+        <li><a href="/operations?fnum=25">peer came last today</a></li>
+        <li><a href="/operations?fnum=26">peer left for N minutes yesterday</a></li>
+        <li><a href="/operations?fnum=27">early visits for each month</a></li>
+    </ol>
+</div>
+
+<div class="function_form" {% if tab != 'default' or fnum == '' %} style="display: none"{% endif %}>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ input_form.as_p}}
+        <input type="submit" class="btn custom-button">
+    </form>
+</div>
+
+<div class="raw" {% if tab != 'raw' %} style="display: none" {% endif %}>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ input_form.as_p}}
+        <input type="submit" class="btn custom-button">
+    </form>
+</div>
+{% endblock %}
+
+
+{% block content_right %}
+<div class="output" {% if output == None %} style="display: none" {% endif %}>
+    <form action="operations_export" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="table_header", value="{{ table_header }}">
+        <input type="hidden" name="output", value="{{ output }}">
+        <button type="submit" class="btn_export btn custom-button">Export</button>
+    </form>
+    <table>
+        <tr>
+            {% for elem in table_header %}
+            <th><b>{{ elem }}</b></th>
+            {% endfor %}
+        </tr>
+        {% for item in output %}
+        <tr>
+            {% for elem in item %}
+                <td>{{ elem }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
