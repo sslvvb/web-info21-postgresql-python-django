@@ -43,20 +43,11 @@
         </div>
     </header>
 
-        <main>
-            <div class="subsection">
-                {% block subsection %}{% endblock %}
-            </div>
-            <table class="main-double">
-                <tr>
-                    <td style="width:50%">{% block content_left %}{% endblock %}</td>
-                    <td>{% block content_right %}{% endblock %}</td>
-                </tr>
-            </table>
-            <div class="centered-container">
-                {% block content_center %}{% endblock %}
-            </div>
-        </main>
+    <main>
+        <div class="centered-container">
+            {% block content_center %}{% endblock %}
+        </div>
+    </main>
 
     <footer>
         <div class="footer">
