@@ -2,7 +2,8 @@
 
 ## Table of Contents
 - [Introduction](#introduction)
-- [Build](#build)
+- [Technologies](#technologies)
+- [Installation](#installation)
 - [Content](#content)
 
 ## Introduction
@@ -16,12 +17,20 @@ Web-интерфейс для проекта SQL. Web-приложение с и
 Подготовлено к запуску и упаковано в docker-контейнеры:
 
 - база данных
-- проксирующий сервер (nginx)
 - django web app
 
-Docker-compose для запуска всего приложения. "Наружу" смотрит только docker-контейнер, содержащий Nginx.
+Docker-compose для запуска всего приложения.
 
-## Build
+## Technologies
+- Python 3.11
+- Django
+- PostgreSQL
+- HTML/CSS
+- Bootstrap
+- Docker
+- Docker-compose
+
+## Installation
 
 - Убедитесь, что Docker установлен и запущен
 - `make` - запуск контейнеров через docker-compose 🚀
